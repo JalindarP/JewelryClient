@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Client } from '../services/handcraft-service.service';
 
 @Component({
   selector: 'app-tab1',
@@ -6,7 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-
-  constructor() {}
-
+  items: string[];
+  constructor(private handcraftService: Client) {}
+  ngOnInit(): void {
+    this.handcraftService.get().subscribe(items => {
+      this.items = items;
+    });
+  }
 }
